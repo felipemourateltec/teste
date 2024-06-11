@@ -7,29 +7,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Executar Job A
-        run: echo "Executando Job A"
+        run: echo "Executando Job A" && sleep 3000
 
   jobB:
     runs-on: ubuntu-latest
     steps:
       - name: Executar Job B
-        run: echo "Executando Job B"
+        run: echo "Executando Job B" && sleep 3000
 
   jobC:
     runs-on: ubuntu-latest
     steps:
       - name: Executar Job C
-        run: echo "Executando Job C"
+        run: echo "Executando Job C" && sleep 3000
 
   jobAA:
-    needs: [jobA, JobB]
+    needs: [jobA, JobB, JobC]
     runs-on: ubuntu-latest
     steps:
       - name: Executar Job AA
         run: echo "Executando Job AA depois de Job A"
 
   jobBB:
-    needs: [jobA, JobB]
+    needs: [jobA, JobB, JobC]
     runs-on: ubuntu-latest
     steps:
       - name: Executar Job BB
