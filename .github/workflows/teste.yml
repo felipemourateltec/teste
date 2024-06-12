@@ -1,45 +1,45 @@
 name: Exemplo de Workflow Paralelo
-
+#runners-to-test
 on: [push]
 concurrency:
   group: "${{ github.ref }}"
   cancel-in-progress: false
 jobs:
   jobA:
-    runs-on: ubuntu-latest
+    runs-on: runners-to-test
     steps:
       - name: Executar Job A
         run: echo "Executando Job A" && sleep 40
 
   jobB:
-    runs-on: ubuntu-latest
+    runs-on: runners-to-test
     steps:
       - name: Executar Job B
         run: echo "Executando Job B" && sleep 60
 
   jobC:
-    runs-on: ubuntu-latest
+    runs-on: runners-to-test
     steps:
       - name: Executar Job C
         run: echo "Executando Job C" && sleep 80
 
   jobAA:
     needs: [jobA, JobC]
-    runs-on: ubuntu-latest
+    runs-on: runners-to-test
     steps:
       - name: Executar Job AA
         run: echo "Executando Job AA depois de Job A"
 
   jobBB:
     needs: [jobB, JobC]
-    runs-on: ubuntu-latest
+    runs-on: runners-to-test
     steps:
       - name: Executar Job BB
         run: echo "Executando Job BB depois de Job B"
 
   jobCC:
     needs: [jobA, JobB]
-    runs-on: ubuntu-latest
+    runs-on: runners-to-test
     steps:
       - name: Executar Job CC
         run: echo "Executando Job CC depois de Job C"
