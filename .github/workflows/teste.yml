@@ -1,9 +1,6 @@
 name: Exemplo de Workflow Paralelo
 #runners-to-test
 on: [push]
-concurrency:
-  group: "${{ github.ref }}"
-  cancel-in-progress: false
 jobs:
   jobA:
     runs-on: runners-to-test
