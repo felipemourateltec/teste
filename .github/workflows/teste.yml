@@ -1,63 +1,42 @@
 name: Exemplo de Workflow Paralelo
-
+#runners-to-test
 on: [push]
-
 jobs:
   jobA:
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [runner-01, runner-02, runner-03]
+    runs-on: runners-to-test
     steps:
       - name: Executar Job A
         run: echo "Executando Job A" && sleep 40
 
   jobB:
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [runner-01, runner-02, runner-03]
+    runs-on: runners-to-test
     steps:
       - name: Executar Job B
         run: echo "Executando Job B" && sleep 60
 
   jobC:
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [runner-01, runner-02, runner-03]
+    runs-on: runners-to-test
     steps:
       - name: Executar Job C
         run: echo "Executando Job C" && sleep 80
 
   jobAA:
-    needs: [jobA, jobC]
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [runner-01, runner-02, runner-03]
+    needs: [jobA, JobC]
+    runs-on: runners-to-test
     steps:
       - name: Executar Job AA
-        run: echo "Executando Job AA depois de Job A e Job C"
+        run: echo "Executando Job AA depois de Job A"
 
   jobBB:
-    needs: [jobB, jobC]
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [runner-01, runner-02, runner-03]
+    needs: [jobB, JobC]
+    runs-on: runners-to-test
     steps:
       - name: Executar Job BB
-        run: echo "Executando Job BB depois de Job B e Job C"
+        run: echo "Executando Job BB depois de Job B"
 
   jobCC:
-    needs: [jobA, jobB]
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [runner-01, runner-02, runner-03]
+    needs: [jobA, JobB]
+    runs-on: runners-to-test
     steps:
       - name: Executar Job CC
-        run: echo "Executando Job CC depois de Job A e Job B"
-
-
+        run: echo "Executando Job CC depois de Job C"
